@@ -1,0 +1,60 @@
+<openerp>
+    <data>
+
+        <record id="view_project_issue_filter" model="ir.ui.view">
+            <field name="name">Project Issue Tracker Search</field>
+            <field name="model">project.issue</field>
+            <field name="inherit_id" ref="project_issue.view_project_issue_filter" />
+            <field name="arch" type="xml">
+				<filter name="Responsible" position="after">
+					<filter string="Contact" name="Contact" context="{'group_by':'partner_id'}" />
+				</filter>
+			</field>
+		</record>
+ 
+    <record model="ir.ui.view" id="view_users_portal_project_issue_form">
+        <field name="name">view.users.portal.project.issue.form</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form" />
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <field name="partner_id" position="after">
+                <field name="portal_project_id"/>
+                <field name="portal_customer_id"/>
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_portal_project_issue_form">
+        <field name="name">view.portal.project.issue.form</field>
+        <field name="model">project.issue</field>
+        <field name="inherit_id" ref="project_issue.project_issue_form_view" />
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+        	<field name="description" position="replace">
+        		<field name="description" placeholder="Add an internal note..." groups="base.group_user,base.group_portal"/>
+        	</field>
+        	<field name="priority" position="replace">
+				<field name="priority" groups="base.group_user,base.group_portal" widget="priority"/>
+			</field>
+             <xpath expr="//field[@name='stage_id']" position="before">
+                <button attrs="{'invisible': [('stage_name', '!=', 'To approve')]}" string="To plan" name="action_to_plan" type="object" class="oe_highlight"/>
+                <button attrs="{'invisible': [('stage_name', '!=', 'To approve')]}" string="To qualify" name="action_to_qualify" type="object" class="oe_highlight"/>
+                <button attrs="{'invisible': [('stage_name', '!=', 'To test')]}" string="To release" name="action_to_release" type="object" class="oe_highlight"/>
+                <button attrs="{'invisible': [('stage_name', '!=', 'To test'),('stage_name', '!=', 'To close')]}" string="In progress" name="action_in_progress" type="object" class="oe_highlight"/>
+                <button attrs="{'invisible': [('stage_name', '!=', 'To close')]}" string="Closed" name="action_to_close" type="object" class="oe_highlight"/>
+                <button string="Cancel" name="action_cancel" type="object"/>
+                <button string="On hold" name="action_hold" type="object"/>
+            </xpath>
+            <field name="id" position="after">
+                <group col="2" colspan="2">
+                    <field name="estimated_time" widget="float_time"/>
+                    <field name="in_warranty"/>
+                    <field name="stage_name" invisible="True"/>
+                </group>
+            </field>
+        </field>
+    </record>
+
+    </data>
+</openerp>

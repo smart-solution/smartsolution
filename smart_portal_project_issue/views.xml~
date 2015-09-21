@@ -1,5 +1,5 @@
 <openerp>
-     <data>
+    <data>
         <record model="ir.ui.view" id="project_issue_tree_view">
             <field name="name">Project Issue Tracker Tree</field>
             <field name="model">project.issue</field>
@@ -18,7 +18,7 @@
             <field name="arch" type="xml">
 				<filter name="Responsible" position="after">
 					<filter string="Contact" name="Contact" context="{'group_by':'partner_id'}" />
-					<filter string="Sprint Date" context="{'group_by':'sprint_date'}" />
+					<filter string="Sprint Date" name="Sprint Date" context="{'group by':'sprint_date'}" />
 				</filter>
 			</field>
 		</record>
@@ -62,7 +62,7 @@
                     <field name="estimated_time" widget="float_time"/>
                     <field name="in_warranty"/>
                     <field name="stage_name" invisible="True"/>
-                    <field name="sprint_date"/>
+					<field name="sprint_date"/>
                 </group>
             </field>
         </field>
@@ -81,6 +81,6 @@
         	</field>
        	</field>
    	</record>
-   	
+
     </data>
 </openerp>

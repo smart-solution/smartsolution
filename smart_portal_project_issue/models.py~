@@ -48,7 +48,6 @@ class project_issue(models.Model):
             project_ids = self.pool.get('project.project').search(cr, uid, [('partner_id','=',user.portal_customer_id.id)])
             args.append(['project_id','in',project_ids])
 #         pdb.set_trace()
-        print args
         return super(project_issue, self).search(cr, uid, args=args, offset=offset, limit=limit, order=order,
             context=context, count=count)
 

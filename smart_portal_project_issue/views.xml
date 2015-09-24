@@ -7,6 +7,7 @@
             <field name="arch" type="xml">
             <field name="task_id" position="after">
                 <field name="sprint_date"/>
+                <field name="sprint_version"/>
             </field>
         </field>
     </record>
@@ -19,6 +20,7 @@
 				<filter name="Responsible" position="after">
 					<filter string="Contact" name="Contact" context="{'group_by':'partner_id'}" />
 					<filter string="Sprint Date" context="{'group_by':'sprint_date'}" />
+					<filter string="Sprint Version" context="{'group_by':'sprint_version'}" />
 				</filter>
 			</field>
 		</record>
@@ -63,6 +65,7 @@
                     <field name="in_warranty"/>
                     <field name="stage_name" invisible="True"/>
                     <field name="sprint_date"/>
+                    <field name="sprint_version"/>
                 </group>
             </field>
         </field>
@@ -75,9 +78,9 @@
         <field name="arch" type="xml">
         	<field name="partner_id" position="after">
 				<t t-if="record.sprint_date.raw_value">
-					<br/><strong>Sprint: </strong><field name="sprint_date"/>
+					<br/><strong>Sprint: </strong><field name="sprint_date"/><strong> </strong><field name="sprint_version"/>
 				</t>
-        		<br/><strong>Id: </strong><field name="id"/>
+        		<br/><strong>ID: </strong><field name="id"/>
         	</field>
        	</field>
    	</record>

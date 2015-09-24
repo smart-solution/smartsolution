@@ -27,7 +27,8 @@ class project_issue(models.Model):
     estimated_time = fields.Float('Estimated Duration')
     project_ids = fields.One2many('project.project', 'partner_id', string='Projects')
     stage_name = fields.Char(related='stage_id.name')
-    sprint_date = fields.Date('Sprint Date') 
+    sprint_date = fields.Date('Sprint Date')
+    sprint_version = fields.Char('Sprint Version') 
 
     def create(self, cr, uid, vals, context=None):
         """Fills the issue project with the user default project for portal issues"""

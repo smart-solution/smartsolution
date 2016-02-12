@@ -1,0 +1,321 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* qweb_custom_invoice
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-06-12 16:54+0000\n"
+"PO-Revision-Date: 2015-06-12 16:54+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: qweb_custom_invoice
+#: view:website:qweb_custom_invoice.qweb_custom_invoice_header
+msgid "Admin: Diksmuidestraat 24 | 9000 Gent |"
+msgstr "Admin: Diksmuidestraat 24 | 9000 Gent |"
+
+#. module: qweb_custom_invoice
+#: view:website:account.report_invoice_document
+msgid "Amount"
+msgstr "Bedrag"
+
+#. module: qweb_custom_invoice
+#: view:website:account.report_invoice_document
+msgid "BE69 7370 3228 5178 - BIC KREDBEBB"
+msgstr "BE69 7370 3228 5178 - BIC KREDBEBB"
+
+#. module: qweb_custom_invoice
+#: view:website:account.report_invoice_document
+msgid "Base"
+msgstr "Basis"
+
+#. module: qweb_custom_invoice
+#: selection:account.condition_text,type:0
+msgid "Bottom condition"
+msgstr "Bottom conditie"
+
+#. module: qweb_custom_invoice
+#: view:website:account.report_invoice_document
+msgid "Cancelled Invoice"
+msgstr "Geannuleerde factuur"
+
+#. module: qweb_custom_invoice
+#: field:account.condition_text,text:0
+msgid "Condition"
+msgstr "Conditie"
+
+#. module: qweb_custom_invoice
+#: field:account.condition_text,name:0
+msgid "Condition summary"
+msgstr "Overzicht condities"
+
+#. module: qweb_custom_invoice
+#: view:account.invoice:qweb_custom_invoice.invoice_form_add_notes
+msgid "Conditions"
+msgstr "Condities"
+
+#. module: qweb_custom_invoice
+#: view:website:qweb_custom_invoice.qweb_custom_invoice_header
+msgid "Contact:"
+msgstr "Contact:"
+
+#. module: qweb_custom_invoice
+#: field:account.condition_text,create_uid:0
+msgid "Created by"
+msgstr "Aangemaakt door"
+
+#. module: qweb_custom_invoice
+#: field:account.condition_text,create_date:0
+msgid "Created on"
+msgstr "Aangemaakt op"
+
+#. module: qweb_custom_invoice
+#: view:website:account.report_invoice_document
+msgid "Customer Reference"
+msgstr "Referentie Klant"
+
+#. module: qweb_custom_invoice
+#: view:website:account.report_invoice_document
+msgid "Customer VAT No"
+msgstr "Klant BTW Nr"
+
+#. module: qweb_custom_invoice
+#: view:website:account.report_invoice_document
+msgid "Description"
+msgstr "Omschrijving"
+
+#. module: qweb_custom_invoice
+#: view:website:account.report_invoice_document
+msgid "Draft Invoice"
+msgstr "Voorlopige factuur"
+
+#. module: qweb_custom_invoice
+#: view:website:account.report_invoice_document
+msgid "Due Date"
+msgstr "Vervaldatum"
+
+#. module: qweb_custom_invoice
+#: field:account.invoice,note2:0
+msgid "Footer"
+msgstr "Footer"
+
+#. module: qweb_custom_invoice
+#: field:account.invoice,text_condition2:0
+msgid "Footer condition"
+msgstr "Footer conditie"
+
+#. module: qweb_custom_invoice
+#: field:account.invoice.line,formatted_note:0
+msgid "Formatted Note"
+msgstr "Geformatteerde nota"
+
+#. module: qweb_custom_invoice
+#: field:account.invoice,note1:0
+msgid "Header"
+msgstr "Header"
+
+#. module: qweb_custom_invoice
+#: field:account.invoice,text_condition1:0
+msgid "Header condition"
+msgstr "Header conditie"
+
+#. module: qweb_custom_invoice
+#: field:account.condition_text,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: qweb_custom_invoice
+#: model:ir.model,name:qweb_custom_invoice.model_account_invoice
+#: view:website:account.report_invoice_document
+msgid "Invoice"
+msgstr "Factuur"
+
+#. module: qweb_custom_invoice
+#: view:website:account.report_invoice_document
+msgid "Invoice Date"
+msgstr "Factuurdatum"
+
+#. module: qweb_custom_invoice
+#: model:ir.model,name:qweb_custom_invoice.model_account_invoice_line
+msgid "Invoice Line"
+msgstr "Factuurregel"
+
+#. module: qweb_custom_invoice
+#: view:account.condition_text:qweb_custom_invoice.view_invoice_condition_list_webkit
+#: view:account.condition_text:qweb_custom_invoice.view_invoice_condition_webkit
+msgid "Invoice condition text"
+msgstr "Tekst factuur condities"
+
+#. module: qweb_custom_invoice
+#: view:website:qweb_custom_invoice.qweb_custom_invoice_footer
+msgid "Invoices are payable within 21 days of invoice date or on due date as mentioned on the invoice. In case of dispute , the invoice must be protested by\n"
+"				        	letter or email within 7 days of receipt. In absence thereof, the invoice will be considered accepted.\n"
+"				        	Any sum due after the payment date shall, ipso jure and without notice, carry a delay interest of one (1) percent per month from the payment date of the invoice,\n"
+"				        	each month having commenced being regarded as a full month. In case of total or partial non-payment of an invoice within 60 days following its due date,\n"
+"				        	the Customer shall, ipso jure and without notice, owe an indemnity of ten (10) percent of the amount remaining due, with a minimum of EUR 250.\n"
+"				        	Non-payment of whichever invoices makes all other open invoices immediately due.\n"
+"				        	Costs for collection will be charged to the Customer. Reminders will be charged at EUR 40."
+msgstr "Facturen zijn betaalbaar op 21 dagen factuurdatum of op vervaldatum ingeval vermeld op factuur. Ingeval betwisting moet de factuur geprotesteerd worden via\n"
+"				        	schrijven of email binnen de 7 dagen na ontvangst. In afwezigheid van een reactie wordt de factuur als aanvaard verondersteld.\n"
+"				        	Facturen zullen vanaf hun vervaldag van rechtswege en zonder ingebrekestelling een verwijlintrest opbrengen gelijk aan één (1) procent per maand vanaf vervaldatum,\n"
+"				        	met elke begonnen maand geïnterpreteerd als volle maand. Ingeval niet-betaling of onvolledige betaling binnen 60 dagen na vervaldag,\n"
+"				        	zal er van rechtswege en zonder ingebrekestelling een schadevergoeding verschuldigd zijn van tien (10) procent op het nog te betalen bedrag met een minimum van EUR 250.\n"
+"				        	De niet-betaling van enige factuur op vervaldatum maakt de nog niet vervallen facturen onmiddellijk opeisbaar.\n"
+"				        	Kosten voor de gerechtelijke inning van vorderingen vallen ten laste van de klant. Aanmaningen worden aangerekend aan 40 EUR."
+
+#. module: qweb_custom_invoice
+#: model:ir.model,name:qweb_custom_invoice.model_account_condition_text
+msgid "Invoices conditions"
+msgstr "Factuur condities"
+
+#. module: qweb_custom_invoice
+#: field:account.condition_text,write_uid:0
+msgid "Last Updated by"
+msgstr "Laatst aangepast door"
+
+#. module: qweb_custom_invoice
+#: field:account.condition_text,write_date:0
+msgid "Last Updated on"
+msgstr "Laatst aangepast door"
+
+#. module: qweb_custom_invoice
+#: view:website:account.report_invoice_document
+msgid "Netto"
+msgstr "Netto"
+
+#. module: qweb_custom_invoice
+#: view:website:account.report_invoice_document
+msgid "PRO-FORMA"
+msgstr "PRO-FORMA"
+
+#. module: qweb_custom_invoice
+#: view:website:qweb_custom_invoice.qweb_custom_invoice_footer
+msgid "Page:"
+msgstr "Pagina:"
+
+#. module: qweb_custom_invoice
+#: view:website:account.report_invoice_document
+msgid "Please pay before"
+msgstr "Gelieve voor"
+
+#. module: qweb_custom_invoice
+#: model:ir.model,name:qweb_custom_invoice.model_product_template
+msgid "Product Template"
+msgstr "Productsjabloon"
+
+#. module: qweb_custom_invoice
+#: view:website:account.report_invoice_document
+msgid "Qty"
+msgstr "Aantal"
+
+#. module: qweb_custom_invoice
+#: view:website:account.report_invoice_document
+msgid "Rate"
+msgstr "BTW %"
+
+#. module: qweb_custom_invoice
+#: view:website:account.report_invoice_document
+msgid "Refund"
+msgstr "Creditnota"
+
+#. module: qweb_custom_invoice
+#: view:website:account.report_invoice_document
+msgid "Source Document"
+msgstr "Brondocument"
+
+#. module: qweb_custom_invoice
+#: view:website:account.report_invoice_document
+msgid "Supplier Invoice"
+msgstr "Aankoopfactuur"
+
+#. module: qweb_custom_invoice
+#: view:website:account.report_invoice_document
+msgid "Supplier Refund"
+msgstr "Aankoopcreditnota"
+
+#. module: qweb_custom_invoice
+#: view:website:account.report_invoice_document
+msgid "Taxes"
+msgstr "Btw"
+
+#. module: qweb_custom_invoice
+#: view:website:account.report_invoice_document
+msgid "This invoice is subject to our general terms and conditions."
+msgstr "Deze factuur is onderhevig aan onze algemene voorwaarden."
+
+#. module: qweb_custom_invoice
+#: selection:account.condition_text,type:0
+msgid "Top condition"
+msgstr "Top conditie"
+
+#. module: qweb_custom_invoice
+#: view:website:account.report_invoice_document
+msgid "Total"
+msgstr "Totaal"
+
+#. module: qweb_custom_invoice
+#: view:website:account.report_invoice_document
+msgid "Unit Price"
+msgstr "EH Prijs"
+
+#. module: qweb_custom_invoice
+#: view:website:account.report_invoice_document
+msgid "UoM"
+msgstr "EH"
+
+#. module: qweb_custom_invoice
+#: view:account.invoice:qweb_custom_invoice.invoice_form_add_notes
+msgid "Your bottom conditions here"
+msgstr "Voet condities"
+
+#. module: qweb_custom_invoice
+#: view:account.invoice:qweb_custom_invoice.invoice_form_add_notes
+msgid "Your top conditions here"
+msgstr "Uw top condities hier"
+
+#. module: qweb_custom_invoice
+#: model:ir.actions.act_window,name:qweb_custom_invoice.action_invoice_condition_form_webkit
+#: model:ir.actions.act_window,name:qweb_custom_invoice.action_invoice_condition_webkit
+msgid "account.condition_text"
+msgstr "account.condition_text"
+
+#. module: qweb_custom_invoice
+#: field:product.template,empl_product:0
+msgid "empl"
+msgstr "empl"
+
+#. module: qweb_custom_invoice
+#: view:website:account.report_invoice_document
+msgid "on account"
+msgstr "te betalen op rekening"
+
+#. module: qweb_custom_invoice
+#: view:website:account.report_invoice_document
+msgid "span t-field=\"line.product_id.code\"/>"
+msgstr "span t-field=\"line.product_id.code\"/>"
+
+#. module: qweb_custom_invoice
+#: field:account.condition_text,type:0
+msgid "type"
+msgstr "type"
+
+#. module: qweb_custom_invoice
+#: view:website:account.report_invoice_document
+msgid "while mentioning invoice number"
+msgstr "met vermelding van factuurnummer"
+
+#. module: qweb_custom_invoice
+#: view:website:account.report_invoice_document
+msgid "while mentioning the structured transfer code"
+msgstr "met vermelding van gestructureerde mededeling"
+
+#. module: qweb_custom_invoice
+#: view:website:qweb_custom_invoice.qweb_custom_invoice_footer
+msgid "| RPR"
+msgstr "| RPR"

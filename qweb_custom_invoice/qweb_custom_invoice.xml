@@ -1,0 +1,415 @@
+<?xml version="1.0" ?>
+<openerp>
+    <data>
+
+		<template id="qweb_custom_invoice_layout">
+		    <!-- Multicompany -->
+		    <t t-if="o and 'company_id' in o">
+		        <t t-set="company" t-value="o.company_id"></t>
+		    </t>
+		    <t t-if="not o or not 'company_id' in o">
+		        <t t-set="company" t-value="res_company"></t>
+		    </t>
+		
+		    <t t-call="qweb_custom_invoice.qweb_custom_invoice_header" />
+		    <t t-raw="0" />
+		    <t t-call="qweb_custom_invoice.qweb_custom_invoice_footer" />
+		</template>
+
+        <template id="minimal_layout" inherit_id="report.minimal_layout">
+            <xpath expr="//head" position="inside">
+                <link rel='stylesheet' href="/qweb_custom_invoice/static/src/css/qweb_custom_invoice_style.css"/>
+            </xpath>
+        </template>
+    
+        <template id="qweb_custom_invoice_header">
+		    <div class="header">
+		        <table class="header" style="border-bottom: 0px solid black; width: 100%">
+		            <tr>
+		                <td><img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % company.logo" style="max-height: 45px;"/></td>
+		            </tr>
+		            <tr>
+		                <td><br/></td>
+		            </tr>
+<!--
+		            <tr>
+		                <td>
+		                	<t t-if="company.partner_id.name"><span t-field="company.partner_id.name"/></t>
+						</td>
+		            </tr>
+
+		            <tr>
+		            	<td>
+		            		Admin: Diksmuidestraat 24 | 9000 Gent | <t t-if="company.partner_id.country_id.name"><span t-field="company.partner_id.country_id.name"/></t>
+		            	</td>
+		            </tr>
+-->
+		            <tr>
+		                <td>
+		                	Contact: <span t-field="company.partner_id.phone"/> | <span t-field="company.partner_id.email"/><br/>
+	                	</td>
+		            </tr>
+		        </table>
+		    </div>
+        </template>
+    
+		<template id="qweb_custom_invoice_footer">
+		    <div class="footer">
+			    <table style="border-top: 1px solid black; width: 100%">
+			        <tr >
+			            <td style="text-align:center;font-size:11;">
+		            		<t t-if="company.partner_id.name"><span t-field="company.partner_id.name"/></t>
+		            		<t t-if="company.partner_id.street">| <span t-field="company.partner_id.street"/></t>
+		            		<t t-if="company.partner_id.zip">| <span t-field="company.partner_id.zip"/></t>
+		            		<t t-if="company.partner_id.city"> <span t-field="company.partner_id.city"/></t>
+		            		<t t-if="company.partner_id.country_id.name">| <span t-field="company.partner_id.country_id.name"/></t>
+		            		<t t-if="company.partner_id.vat">| RPR <span t-field="company.partner_id.vat"/></t>
+			            </td>
+			        </tr>
+			        <tr>
+			        	<td style="text-align:left;font-size:9;" width="95%">
+				        	Invoices are payable within 21 days of invoice date or on due date as mentioned on the invoice. In case of dispute , the invoice must be protested by
+				        	letter or email within 7 days of receipt. In absence thereof, the invoice will be considered accepted.
+				        	Any sum due after the payment date shall, ipso jure and without notice, carry a delay interest of one (1) percent per month from the payment date of the invoice,
+				        	each month having commenced being regarded as a full month. In case of total or partial non-payment of an invoice within 60 days following its due date,
+				        	the Customer shall, ipso jure and without notice, owe an indemnity of ten (10) percent of the amount remaining due, with a minimum of EUR 250.
+				        	Non-payment of whichever invoices makes all other open invoices immediately due.
+				        	Costs for collection will be charged to the Customer. Reminders will be charged at EUR 40.
+			        	</td>
+			        </tr>
+			        <tr >
+			            <td style="text-align:right;font-size:11;" width="95%">
+				            <ul class="list-inline">
+				                <li>Page:</li>
+				                <li><span class="page"/></li>
+				                <li>/</li>
+				                <li><span class="topage"/></li>
+				            </ul>
+						</td>
+			        </tr>
+			    </table>
+		    </div>
+		</template>
+    
+		<template id="qweb_custom_invoice" inherit_id="account.report_invoice_document">
+			<xpath expr="//t[@t-call='report.external_layout']" position="replace">
+			    <t t-call="qweb_custom_invoice.qweb_custom_invoice_layout">
+		        <div class="page">
+				    <div class="address">
+				    	<t t-if="o.commercial_partner_id">
+					        <table class="recipient" style="margin-right: 200px;float: right;">
+					        	<t t-if="o.partner_id.id != o.commercial_partner_id.id">
+						            <tr><td class="name" style="font-weight: bold;">
+						            	<t t-if="o.commercial_partner_id.name"><span t-field="o.commercial_partner_id.name"/></t>
+					            	</td></tr>
+						            <tr><td>
+						            	<t t-if="o.partner_id.title"><span t-field="o.partner_id.title"/></t>
+						            	<span t-field="o.partner_id.name"/>
+					            	</td></tr>
+					            </t>
+					        	<t t-if="o.partner_id.id == o.commercial_partner_id.id">
+						            <tr><td class="name" style="font-weight: bold;">
+						            	<t t-if="o.partner_id.title"><span t-field="o.partner_id.title.name"/></t>
+						            	<span t-field="o.partner_id.name"/>
+						            </td></tr>
+					            </t>
+					            <t t-if="o.partner_id.parent_id">
+					            	<t t-set="address_lines" t-value="o.partner_id.contact_address.split(&quot;\n&quot;)[1:]"/>
+					            </t>
+					            <t t-if="not o.partner_id.parent_id">
+					            	<t t-set="address_lines" t-value="o.partner_id.contact_address.split(&quot;\n&quot;)"/>
+					            </t>
+					            <tr t-foreach="address_lines" t-as="part">
+					            	<t t-if="part">
+					            		<tr><td><t t-esc="part"/></td></tr>
+					            	</t>
+					            </tr>
+					        </table>
+						</t>
+						<t t-if="not o.commercial_partner_id">
+					        <table class="recipient" style="margin-right: 200px;float: right;">
+					            <t t-if="o.partner_id.parent_id">
+						            <tr><td class="name" style="font-weight: bold;">
+						            	<t t-if="o.partner_id.parent_id.name"><span t-field="o.partner_id.parent_id.name"/></t>
+					            	</td></tr>
+						            <tr><td>
+						            	<t t-if="o.partner_id.title"><span t-field="o.partner_id.title.name"/></t>
+						            	<span t-field="o.partner_id.name"/>
+					            	</td></tr>
+						            <t t-set="address_lines" t-value="o.partner_id.contact_address.split(&quot;\n&quot;)[1:]"/>
+					            </t>
+					            <t t-if="not o.partner_id.parent_id">
+						            <tr><td class="name" style="font-weight: bold;">
+						            	<t t-if="o.partner_id.title"><span t-field="o.partner_id.title.name"/></t>
+						            	<span t-field="o.partner_id.name"/>
+					            	</td></tr>
+						            <t t-set="address_lines" t-value="o.partner_id.contact_address.split(&quot;\n&quot;)"/>
+					            </t>
+					            <tr t-foreach="address_lines" t-as="part">
+					            	<t t-if="part">
+					            		<tr><td><t t-esc="part"/></td></tr>
+					            	</t>
+					            </tr>
+					        </table>
+					    </t>
+				    </div>
+					
+		            <h1 style="clear: both; padding-top: 20px;font-size: 16px;font-weight: bold;">
+		                <span t-if="o.type == 'out_invoice' and (o.state == 'open' or o.state == 'paid')">Invoice</span>
+		                <span t-if="o.type == 'out_invoice' and o.state == 'proforma2'">PRO-FORMA</span>
+		                <span t-if="o.type == 'out_invoice' and o.state == 'draft'">Draft Invoice</span>
+		                <span t-if="o.type == 'out_invoice' and o.state == 'cancel'">Cancelled Invoice</span>
+		                <span t-if="o.type == 'out_refund'">Refund</span>
+		                <span t-if="o.type == 'in_refund'">Supplier Refund</span>
+		                <span t-if="o.type == 'in_invoice'">Supplier Invoice</span>
+		                <span t-field="o.number"/>
+		            </h1>
+
+				    <table class="basic_table" width="100%">
+				        <tr>
+				            <th style="border: 1px solid lightGrey;font-size: 12px;text-align:left"><strong>Source Document</strong></th>
+				            <th style="border: 1px solid lightGrey;font-size: 12px;text-align:left"><strong>Customer Reference</strong></th>
+				            <th style="border: 1px solid lightGrey;font-size: 12px;text-align:left"><strong>Customer VAT No</strong></th>
+				            <th style="border: 1px solid lightGrey;font-size: 12px;text-align:center"><strong>Invoice Date</strong></th>
+				            <th style="border: 1px solid lightGrey;font-size: 12px;text-align:center"><strong>Due Date</strong></th>
+				        </tr>
+				        <tr>
+				            <td style="border: 1px solid lightGrey;font-size: 12px;text-align:left">
+				            	<t t-if="o.origin"><span t-field="o.origin"/></t>
+				            </td>
+				            <td style="border: 1px solid lightGrey;font-size: 12px;text-align:left">
+				            	<t t-if="o.name"><span t-field="o.name"/></t>
+				            </td>
+				            <td style="border: 1px solid lightGrey;font-size: 12px;text-align:left">
+				            	<t t-if="o.partner_id.vat"><span t-field="o.partner_id.vat"/></t>
+				            </td>
+				            <td style="border: 1px solid lightGrey;font-size: 12px;text-align:center">
+				            	<span t-field="o.date_invoice"/>
+				            </td>
+				            <td style="border: 1px solid lightGrey;font-size: 12px;text-align:center">
+				            	<span t-field="o.date_due"/>
+				            </td>
+				        </tr>
+				    </table>
+	
+				    <div>
+					    <t t-if="o.note1">
+					    	<p t-field="o.note1"/>
+					    </t>
+				    </div>
+	
+				    <table class="list_invoice_table" width="100%" style="margin-top: 20px;">
+				        <thead style="display:table-header-group;">
+				            <tr>
+				                <th style="text-align:center;width:50px;">Qty</th>
+				                <th style="text-align:center;width:50px;">UoM</th>
+				                <th style="text-align:left;">Description</th>
+				                <th style="text-align:center;width:60px;">Unit Price</th>
+				                <th style="text-align:center;width:50px;">Taxes</th>
+				                <th style="text-align:center;width:60px;">Amount</th>
+				            </tr>
+				        </thead>
+
+				        <tbody>
+				        	<t t-set="print_detail" t-value="0"/>
+				        	<tr t-foreach="o.invoice_line" t-as="line">
+				        		<t t-if="line.product_id.empl_product == True">
+				        			<t t-set="print_detail" t-value="1"/>
+				        		</t>
+				                <td class="amount"><span t-field="line.quantity"/></td>
+				                <td class="amount"><span t-field="line.uos_id"  groups="product.group_uom"/></td>
+				                <td t-if="line.product_id.empl_product == True">
+				                	<t t-set="oms" t-value="line.name.split(&quot;\n&quot;)[0]"/>
+				                	<t t-esc="oms"/>
+			                	</td>
+			                	<td t-if="not line.product_id.empl_product == True">
+				                	<span t-field="line.name"/>
+			                	</td>
+				                <td class="amount">
+				                	<span t-field="line.price_unit" 
+				                		t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
+		                		</td>
+				                <td style="text-align:center;width:50px;">
+				                	<span t-esc="', '.join([str(tax.amount).replace('0.','').replace('0,','') for tax in line.invoice_line_tax_id ])"/> %
+			                	</td>
+				                <td class="amount" width="13%">
+	                            <span t-field="line.price_subtotal" 
+	                                t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
+			                	</td>
+					            <tr t-if="line.formatted_note">
+					            	<td class="formatted_note" colspan="6">
+					                	<span t-field="line.formatted_note"/>
+					              </td>
+					            </tr>
+				        	</tr>
+				        </tbody>
+				        <tfoot class="totals">
+				            <tr>
+				                <td colspan="5" style="text-align:right;border-right: thin solid  #ffffff ;border-left: thin solid  #ffffff ;">
+				                    <b><strong>Netto</strong>:</b>
+				                </td>
+				                <td class="amount" style="border-right: thin solid  #ffffff ;border-left: thin solid  #ffffff ;">
+				                    <span t-field="o.amount_untaxed" t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
+				                </td>
+				            </tr>
+				            <tr class="no_bloc">
+				                <td colspan="5" style="text-align:right; border-top: thin solid  #ffffff ; border-right: thin solid  #ffffff ;border-left: thin solid  #ffffff ;">
+				                    <b><strong>Taxes</strong>:</b>
+				                </td>
+				                <td class="amount" style="border-right: thin solid  #ffffff ;border-top: thin solid  #ffffff ;border-left: thin solid  #ffffff ;">
+				                    <span t-field="o.amount_tax" t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
+				                </td>
+				            </tr>
+				            <tr>
+				                <td colspan="5" style="border-right: thin solid  #ffffff ;border-top: thin solid  #ffffff ;border-left: thin solid  #ffffff ;border-bottom: thin solid  #ffffff ;text-align:right;">
+				                    <b><strong>Total</strong>:</b>
+				                </td>
+				                <td class="amount" style="border-right: thin solid  #ffffff ;border-top: thin solid  #ffffff ;border-left: thin solid  #ffffff ;border-bottom: thin solid  #ffffff ;">
+				                    <b><span t-field="o.amount_total" t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/></b>
+				                </td>
+				            </tr>
+				        </tfoot>
+		            </table>
+				    <br/>
+				    <table class="list_total_table" width="60%" t-if="o.tax_line">      
+				        <tr>
+				            <th style="text-align:left;"><strong>Rate</strong></th>
+				            <th><strong>Base</strong></th>
+				            <th><strong>Taxes</strong></th>
+				        </tr>
+				        <tr t-foreach="o.tax_line" t-as="t">
+			                <td style="text-align:left;">
+			                	<span t-field="t.name"/>
+		                	</td>
+			                <td class="amount">
+								<span t-field="t.base" t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
+							</td>
+			                <td class="amount">
+								<span t-field="t.amount" t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
+							</td>
+				        </tr>
+				    </table>
+
+		            <br/>
+		            <p t-if="o.comment">
+		                <span t-field="o.comment"/>
+		            </p>
+		            <p t-if="o.note2">
+		                <span t-field="o.note2"/>
+		            </p>
+		            <p t-if="o.fiscal_position.note">
+		                <span t-field="o.fiscal_position.note"/>
+		            </p>
+		            <br/>
+				    <div t-if="o.type != 'out_refund'">
+				    	<strong>Please pay before</strong> <span t-field="o.date_due"/> <strong>on account</strong> BE69 7370 3228 5178 - BIC KREDBEBB<br/>
+					    <t t-if="o.reference">
+					        <strong>while mentioning the structured transfer code</strong> <span t-field="o.reference"/>
+					    </t>
+					    <t t-if="not o.reference">
+					    	<strong>while mentioning invoice number</strong> <span t-field="o.number"/>
+					    </t>
+					    <br/>
+						<strong>This invoice is subject to our general terms and conditions.</strong>
+						<br/>
+			   		</div>
+   		
+	    			<p style="page-break-after:always"> </p>
+	 				
+	 				<div t-if="print_detail == 1">
+					    <div class="address">
+					    	<t t-if="o.commercial_partner_id">
+						        <table class="recipient" style="margin-right: 200px;float: right;">
+						        	<t t-if="o.partner_id.id != o.commercial_partner_id.id">
+							            <tr><td class="name" style="font-weight: bold;">
+							            	<t t-if="o.commercial_partner_id.name"><span t-field="o.commercial_partner_id.name"/></t>
+						            	</td></tr>
+							            <tr><td>
+							            	<t t-if="o.partner_id.title"><span t-field="o.partner_id.title"/></t>
+							            	<span t-field="o.partner_id.name"/>
+						            	</td></tr>
+						            </t>
+						        	<t t-if="o.partner_id.id == o.commercial_partner_id.id">
+							            <tr><td class="name" style="font-weight: bold;">
+							            	<t t-if="o.partner_id.title"><span t-field="o.partner_id.title.name"/></t>
+							            	<span t-field="o.partner_id.name"/>
+							            </td></tr>
+						            </t>
+						            <t t-if="o.partner_id.parent_id">
+						            	<t t-set="address_lines" t-value="o.partner_id.contact_address.split(&quot;\n&quot;)[1:]"/>
+						            </t>
+						            <t t-if="not o.partner_id.parent_id">
+						            	<t t-set="address_lines" t-value="o.partner_id.contact_address.split(&quot;\n&quot;)"/>
+						            </t>
+						            <tr t-foreach="address_lines" t-as="part">
+						            	<t t-if="part">
+						            		<tr><td><t t-esc="part"/></td></tr>
+						            	</t>
+						            </tr>
+						        </table>
+							</t>
+							<t t-if="not o.commercial_partner_id">
+						        <table class="recipient" style="margin-right: 200px;float: right;">
+						            <t t-if="o.partner_id.parent_id">
+							            <tr><td class="name" style="font-weight: bold;">
+							            	<t t-if="o.partner_id.parent_id.name"><span t-field="o.partner_id.parent_id.name"/></t>
+						            	</td></tr>
+							            <tr><td>
+							            	<t t-if="o.partner_id.title"><span t-field="o.partner_id.title.name"/></t>
+							            	<span t-field="o.partner_id.name"/>
+						            	</td></tr>
+							            <t t-set="address_lines" t-value="o.partner_id.contact_address.split(&quot;\n&quot;)[1:]"/>
+						            </t>
+						            <t t-if="not o.partner_id.parent_id">
+							            <tr><td class="name" style="font-weight: bold;">
+							            	<t t-if="o.partner_id.title"><span t-field="o.partner_id.title.name"/></t>
+							            	<span t-field="o.partner_id.name"/>
+						            	</td></tr>
+							            <t t-set="address_lines" t-value="o.partner_id.contact_address.split(&quot;\n&quot;)"/>
+						            </t>
+						            <tr t-foreach="address_lines" t-as="part">
+						            	<t t-if="part">
+						            		<tr><td><t t-esc="part"/></td></tr>
+						            	</t>
+						            </tr>
+						        </table>
+						    </t>
+					    </div>
+						
+			            <h1 style="clear: both; padding-top: 20px;font-size: 16px;font-weight: bold;">
+			                <span t-if="o.type == 'out_invoice' and (o.state == 'open' or o.state == 'paid')">Invoice</span>
+			                <span t-if="o.type == 'out_invoice' and o.state == 'proforma2'">PRO-FORMA</span>
+			                <span t-if="o.type == 'out_invoice' and o.state == 'draft'">Draft Invoice</span>
+			                <span t-if="o.type == 'out_invoice' and o.state == 'cancel'">Cancelled Invoice</span>
+			                <span t-if="o.type == 'out_refund'">Refund</span>
+			                <span t-if="o.type == 'in_refund'">Supplier Refund</span>
+			                <span t-if="o.type == 'in_invoice'">Supplier Invoice</span>
+			                <span t-field="o.number"/>
+			            </h1>
+					    <table class="list_invoice_det_table" width="100%" style="margin-top: 20px;">
+					        <thead>
+					            <tr>
+					                <th style="text-align:left;width:50px;"><strong>Qty</strong></th>
+									<th style="text-align:left;width:50px;"><strong>UoM</strong></th>                
+					                <th><strong>Description</strong></th>
+					           </tr>
+					        </thead>
+					        <tbody>
+					        <t t-foreach="o.invoice_line" t-as="line">
+					        	<tr t-if="line.product_id.empl_product == True">
+					                <td class="amount" valign="top"><span t-field="line.quantity"/></td>
+					                <td class="amount" valign="top"><span t-field="line.uos_id"  groups="product.group_uom"/></td>
+					                <td><span t-field="line.name"/></td>
+					            </tr>
+					        </t>
+					        </tbody>
+					    </table>
+					    <p style="page-break-after:always"></p> 
+		 			</div>
+		        </div>
+		        </t>
+			</xpath> 
+		</template>
+
+    </data>
+</openerp>

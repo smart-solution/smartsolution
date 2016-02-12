@@ -1,0 +1,43 @@
+<openerp>
+    <data>
+       
+ 
+   <record id="view_workflow_generator_wizard_form" model="ir.ui.view">
+        <field name='name'>Business Flow Generator</field>
+        <field name='model'>workflow.generator.wizard</field>
+        <field name='arch' type='xml'>
+        <form string="Générateur de flux métier">
+            <group colspan="4" col="2">
+                <group colspan="4">
+                    <field name="name"/>
+                    <field name="parent_menu_id"/>
+                </group>
+                <group>
+                    <button name="workflow_generate" string="Générer le flux métier" type="object"/>
+                </group>
+            </group>
+        </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_workflow_generate_wizard">
+        <field name="name">Générer le flux métier</field>
+        <field name="res_model">workflow.generator.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_type">form</field>
+        <field name="target">new</field>
+    </record>
+
+        <record id="view_workflow_generator_workflow_form" model="ir.ui.view">
+            <field name="name">Business Flow Generator</field>
+            <field name="model">workflow</field>
+            <field name="inherit_id" ref="base.view_workflow_form" />
+            <field name="arch" type="xml">
+				<field name="activities" position="after">
+                    <button name="%(action_workflow_generate_wizard)d" string="Générer le flux métier" type="action"/>
+				</field>
+			</field>
+		</record>
+
+    </data>
+</openerp>
